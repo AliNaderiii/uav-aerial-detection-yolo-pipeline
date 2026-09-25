@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# YOLO
+runs/
+weights/
+*.pt
+*.onnx
+*.engine
+*.trt
+
+# Datasets
+data/
+datasets/
+VisDrone*/
+*.zip
+*.tar.gz
+
+# MQTT
+mqtt_logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Secrets
+.env
+*.key
+*.pem

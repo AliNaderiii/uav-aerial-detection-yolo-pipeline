@@ -1,0 +1,56 @@
+# YOLOv8n Config - UAV Aerial 4-Class (VisDrone + SHWD)
+# Optimized for DJI Matrice 4TD NPU + GTX 1650 4GB training
+# Classes: 0=Person, 1=Vehicle, 2=Hard-Hat, 3=No-Hard-Hat
+
+# Model
+model: yolov8n.pt
+nc: 4
+names: ["Person", "Vehicle", "Hard-Hat", "No-Hard-Hat"]
+
+# Dataset - will be replaced by merge_datasets.py output
+path: ../data/final_4class
+train: ../data/final_4class/train.txt
+val: ../data/final_4class/val.txt
+
+# Training - Stable for 4GB VRAM
+epochs: 80
+imgsz: 640
+batch: 4
+workers: 0
+device: 0
+amp: False
+optimizer: SGD
+lr0: 0.001
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+warmup_epochs: 3
+warmup_momentum: 0.8
+box: 7.5
+cls: 0.5
+dfl: 1.5
+
+# Aerial Optimized Augmentations (VisDrone small objects)
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0
+translate: 0.1
+scale: 0.5
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+mosaic: 1.0
+mixup: 0.1
+copy_paste: 0.3  # Important for small aerial vehicles
+close_mosaic: 10
+
+# Validation
+val: True
+plots: True
+save: True
+save_period: 10
+
+# NPU Export
+# After training: python scripts/export.py --weights runs/detect/train/weights/best.pt --opset 12 --imgsz 640

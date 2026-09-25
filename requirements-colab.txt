@@ -1,0 +1,14 @@
+ultralytics==8.3.0
+torch==2.4.0
+torchvision==0.19.0
+onnx==1.18.0
+onnx-simplifier==0.4.36
+onnxruntime==1.19.2
+opencv-python==4.10.0.84
+paho-mqtt==2.2.1
+pydantic==2.9.2
+tqdm==4.66.5
+PyYAML==6.0.2
+fiftyone==1.2.0
+gdown==5.2.0
+roboflow==1.1.48
