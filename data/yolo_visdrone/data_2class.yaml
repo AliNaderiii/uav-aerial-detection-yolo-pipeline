@@ -1,0 +1,6 @@
+﻿# VisDrone-only 2-class for quick start
+path: D:/uav-aerial-detection-yolo-pipeline/data/yolo_visdrone
+train: D:/uav-aerial-detection-yolo-pipeline/data/yolo_visdrone/train.txt
+val: D:/uav-aerial-detection-yolo-pipeline/data/yolo_visdrone/val.txt
+nc: 2
+names: ['Person', 'Vehicle']
