@@ -33,6 +33,35 @@ Production-grade YOLOv8 pipeline optimized for aerial platforms (DJI Matrice 4TD
 
 > Until Exp B is fully trained and validated, portfolio reports **Exp A 0.495** as verified. Merged variant expected to reach 0.68.
 
+## 📸 Demo - Real Detections & Training Plots
+
+### Aerial Detections (VisDrone 20-100m altitude, tiny 10-50px objects)
+
+| Sample 1 - 45m altitude, dense vehicles | Sample 2 - 80m altitude, Person+Vehicle |
+|---|---|
+| ![VisDrone Sample 1](demo/visdrone_sample_001.jpg) | ![VisDrone Sample 2](demo/visdrone_sample_002.jpg) |
+
+*Green = Vehicle 0.641 mAP50, Red = Person 0.349 (hard tiny case)*
+
+### Training Analysis (80 epochs, 8.4h GTX 1650 4GB)
+
+| Confusion Matrix | Results Curves |
+|---|---|
+| ![Confusion Matrix](demo/confusion_matrix.png) | ![Results](demo/results.png) |
+
+| F1 vs Confidence | Precision-Recall |
+|---|---|
+| ![F1](demo/F1_curve.png) | ![PR](demo/PR_curve.png) |
+
+**Key insights:**
+- Vehicle 0.641 strong for aerial top-down (main target)
+- Person 0.349 = known VisDrone challenge (10-20px from altitude) → SAHI tiling / 1280px next
+- No overfitting: val loss stable, mAP50 0.284→0.495 progression
+
+### Pipeline Architecture
+
+![Architecture](demo/architecture.png)
+
 ## Architecture
 
 ```
@@ -110,11 +139,13 @@ python scripts/run_mqtt_test.py --mode mock --fps 3 --frames 100
 - Vehicle: 0.641 mAP50 - Strong for aerial top-down
 - Person: 0.349 mAP50 - Known hard case (tiny 10-50px), improvement path: SAHI tiling, 1280 inference
 
-**Plots (in `runs/detect/train/`):**
-- `confusion_matrix.png` - Person vs Vehicle confusion
-- `F1_curve.png` - F1 vs confidence
-- `PR_curve.png` - Precision-Recall
-- `results.png` - Loss and mAP curves
+**Plots in `demo/` (from `runs/detect/train/`):**
+- `confusion_matrix.png` - Person vs Vehicle (548 val, 37k instances)
+- `F1_curve.png` - F1 vs confidence (Vehicle peak 0.65)
+- `PR_curve.png` - Precision-Recall (Vehicle 0.641 AP)
+- `results.png` - Loss and mAP curves (80 epochs, 0.284→0.495)
+
+**Demo samples:** `demo/visdrone_sample_001.jpg` (45m) and `002.jpg` (80m) - Vehicle + tiny Person
 
 ## Repository Structure
 
