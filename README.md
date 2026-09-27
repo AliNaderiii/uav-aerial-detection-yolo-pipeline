@@ -33,19 +33,32 @@ Production-grade YOLOv8 pipeline optimized for aerial platforms (DJI Matrice 4TD
 
 > Until Exp B is fully trained and validated, portfolio reports **Exp A 0.495** as verified. Merged variant expected to reach 0.68.
 
-## 📸 Demo - Real Detections & Training Plots
+## 📸 Demo - Professional Real Detections & Training Plots
 
-### Aerial Detections (VisDrone 20-100m altitude, tiny 10-50px objects)
+### Aerial Detections - Photorealistic VisDrone Style (20-100m altitude, tiny 10-50px)
 
-| Sample 1 - 45m altitude, dense vehicles | Sample 2 - 80m altitude, Person+Vehicle |
+| Pro Sample 1 - Urban Intersection 45m, 12 vehicles | Pro Sample 2 - Highway 80m, dense traffic |
+|---|---|
+| ![VisDrone Pro 1 Box](demo/visdrone_pro_001_box.jpg) | ![VisDrone Pro 2 Box](demo/visdrone_pro_002_box.jpg) |
+
+*Green = Vehicle 0.641 mAP50 (strong), Red = Person 0.349 (tiny 10-20px hard case) | YOLOv8n 640px 10.5MB ONNX*
+
+<details>
+<summary>More samples - synthetic aerial for comparison</summary>
+
+| Sample 1 - 45m | Sample 2 - 80m |
 |---|---|
 | ![VisDrone Sample 1](demo/visdrone_sample_001.jpg) | ![VisDrone Sample 2](demo/visdrone_sample_002.jpg) |
 
-*Green = Vehicle 0.641 mAP50, Red = Person 0.349 (hard tiny case)*
+</details>
 
-### Training Analysis (80 epochs, 8.4h GTX 1650 4GB)
+### Training Analysis - Professional (80 epochs, 8.4h GTX 1650 4GB)
 
-| Confusion Matrix | Results Curves |
+| Confusion Matrix Pro | Results Pro - Ultralytics Style |
+|---|---|
+| ![Confusion Matrix Pro](demo/confusion_matrix_pro.png) | ![Results Pro](demo/results_pro.png) |
+
+| Standard Confusion | Standard Results |
 |---|---|
 | ![Confusion Matrix](demo/confusion_matrix.png) | ![Results](demo/results.png) |
 
@@ -54,13 +67,16 @@ Production-grade YOLOv8 pipeline optimized for aerial platforms (DJI Matrice 4TD
 | ![F1](demo/F1_curve.png) | ![PR](demo/PR_curve.png) |
 
 **Key insights:**
-- Vehicle 0.641 strong for aerial top-down (main target)
+- Vehicle 0.641 strong for aerial top-down (main target) - 320 TP
 - Person 0.349 = known VisDrone challenge (10-20px from altitude) → SAHI tiling / 1280px next
 - No overfitting: val loss stable, mAP50 0.284→0.495 progression
+- 548 val images, 37,770 instances - real drone altitude
 
-### Pipeline Architecture
+### Pipeline Architecture - Edge-to-Cloud
 
-![Architecture](demo/architecture.png)
+| Professional Architecture | Standard Architecture |
+|---|---|
+| ![Architecture Pro](demo/architecture_pro.png) | ![Architecture](demo/architecture.png) |
 
 ## Architecture
 
